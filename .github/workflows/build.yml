@@ -28,7 +28,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest, macos-13]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
@@ -36,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 11
+          node-version: 16
           cache: 'npm'
       - name: Install dependencies
         run: npm install
