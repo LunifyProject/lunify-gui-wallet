@@ -73,20 +73,25 @@ jobs:
       - name: Build for ${{ matrix.os }}
         run: npm run build
 
-      - name: Set paths
-        id: set_paths
-        run: |
-          if [ "${{ matrix.os }}" == "windows-latest" ]; then
-            echo "EXE_EXTENSION=.exe" >> $GITHUB_ENV
-          else
-            echo "EXE_EXTENSION=" >> $GITHUB_ENV
-          fi
-
       - name: Show files
         run: ls dist/electron/Packaged
 
       - uses: actions/upload-artifact@v4
+        if: matrix.os == 'macos-13' && matrix.os == 'macos-latest'
         with:
           name: Installer ${{ matrix.os }}
-          path: dist/electron/Packaged/**
+          path: dist/electron/Packaged/**.dmg
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: Installer ${{ matrix.os }}
+          path: dist/electron/Packaged/**.AppImage
+          path: dist/electron/Packaged/**.deb
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'windows-latest'
+        with:
+          name: Installer ${{ matrix.os }}
+          path: dist/electron/Packaged/**.exe
 
