@@ -86,8 +86,9 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         with:
           name: Installer ${{ matrix.os }}
-          path: dist/electron/Packaged/**.AppImage
-          path: dist/electron/Packaged/**.deb
+          path: |
+            dist/electron/Packaged/**.AppImage
+            dist/electron/Packaged/**.deb
 
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'windows-latest'
