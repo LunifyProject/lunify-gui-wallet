@@ -38,23 +38,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
-      - name: Install distutils for Python (macOS)
-        if: matrix.os == 'macos-13'
-        run: |
-          python3 -m ensurepip --upgrade
-          python3 -m pip install --upgrade setuptools
-      - name: Install dependencies
-        run: |
-          npm install
-      - name: Rebuild native dependencies
-        run: |
-          npm rebuild --runtime=electron --target=11.5.0 --arch=x64
-
 
       - name: Python linking
         if: matrix.os == 'macos-latest'
@@ -62,12 +50,25 @@ jobs:
           brew install python@3.9  # Install Python 3
           echo "/opt/homebrew/opt/python@3.9/bin" >> $GITHUB_PATH  # Add Python 3.9 to the PATH
           echo "/opt/homebrew/opt/python@3.9/libexec/bin" >> $GITHUB_PATH  # Add pip3.9 to the PATH
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 16
           cache: 'npm'
+
+      - name: Install distutils for Python (macOS)
+        if: matrix.os == 'macos-13'
+        run: |
+          python3 -m ensurepip --upgrade
+          python3 -m pip install --upgrade setuptools
+          
+      - name: Rebuild native dependencies
+        run: |
+          npm rebuild --runtime=electron --target=11.5.0 --arch=x64
+
       - name: Install dependencies
         run: npm install
+        
       - name: Build for ${{ matrix.os }}
         run: npm run build
