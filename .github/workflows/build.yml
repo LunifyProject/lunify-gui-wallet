@@ -44,8 +44,8 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           brew install python@3.9  # Install Python 3
-          sudo ln -s /opt/homebrew/bin/python3 /usr/bin/python  # Create symbolic link to make Python accessible as `/usr/bin/python`
-          sudo ln -s /opt/homebrew/bin/pip3 /usr/bin/pip  # Link pip3 to `/usr/bin/pip`
+          echo "/opt/homebrew/opt/python@3.9/bin" >> $GITHUB_PATH  # Add Python 3.9 to the PATH
+          echo "/opt/homebrew/opt/python@3.9/libexec/bin" >> $GITHUB_PATH  # Add pip3.9 to the PATH
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
