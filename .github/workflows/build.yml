@@ -125,7 +125,7 @@ jobs:
         
     - name: Move MacOS arm64 files
       run: |
-        mv Installer-macos-latest/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-arm64.dmg
+        mv Installer-macos-13/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-arm64.dmg
 
     - name: Create GitHub Release
       id: create_release
