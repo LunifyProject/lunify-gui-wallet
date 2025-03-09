@@ -24,6 +24,9 @@ on:
         required: true
         default: 'v1.0.0'
 
+env:
+  USE_HARD_LINKS: false
+
 jobs:
   build:
     strategy:
