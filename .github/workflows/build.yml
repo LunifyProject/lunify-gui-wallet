@@ -69,6 +69,24 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        
+
       - name: Build for ${{ matrix.os }}
         run: npm run build
+
+      - name: Set paths
+        id: set_paths
+        run: |
+          if [ "${{ matrix.os }}" == "windows-latest" ]; then
+            echo "EXE_EXTENSION=.exe" >> $GITHUB_ENV
+          else
+            echo "EXE_EXTENSION=" >> $GITHUB_ENV
+          fi
+
+      - name: Show files
+        run: ls dist/electron/Packaged
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Installer ${{ matrix.os }}
+          path: dist/electron/Packaged/**
+
