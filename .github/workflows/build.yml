@@ -96,3 +96,22 @@ jobs:
           name: Installer ${{ matrix.os }}
           path: dist/electron/Packaged/**.exe
 
+  download:
+    name: Release Artifacts
+    needs: ['build']
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.run_release == 'true' }}
+    steps:
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release
+        merge-multiple: false
+    - name: Create GitHub Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: Lunify GUI Wallet ${{ github.event.inputs.version_number }}
+        tag_name: ${{ github.event.inputs.version_number }}
+        draft: true
+        prerelease: false
