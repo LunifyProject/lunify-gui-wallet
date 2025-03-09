@@ -57,26 +57,3 @@ jobs:
         run: npm install
       - name: Build for ${{ matrix.os }}
         run: npm run build
-      - name: Package Electron App
-        run: npx electron-builder --${{ matrix.os == 'windows-latest' && 'win' || matrix.os == 'macos-latest' && 'mac' || 'linux' }}
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Lunify-Wallet-${{ matrix.os }}
-          path: dist/electron/Packaged/
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: releases/
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: releases/**/*
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ github.ref_name }}
-          body: "🚀 New release for Lunify Wallet!"
