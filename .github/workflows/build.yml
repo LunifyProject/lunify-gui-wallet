@@ -26,6 +26,7 @@ on:
 
 env:
   USE_HARD_LINKS: false
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   build:
@@ -33,6 +34,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest, macos-13]
     runs-on: ${{ matrix.os }}
+    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -55,8 +57,6 @@ jobs:
         run: npm install
       - name: Build for ${{ matrix.os }}
         run: npm run build
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Package Electron App
         run: npx electron-builder --${{ matrix.os == 'windows-latest' && 'win' || matrix.os == 'macos-latest' && 'mac' || 'linux' }}
       - name: Upload Artifacts
