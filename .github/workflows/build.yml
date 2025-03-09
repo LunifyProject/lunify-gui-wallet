@@ -40,6 +40,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+      - name: Python linking
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install python@3.9  # Install Python 3
+          sudo ln -s /opt/homebrew/bin/python3 /usr/bin/python  # Create symbolic link to make Python accessible as `/usr/bin/python`
+          sudo ln -s /opt/homebrew/bin/pip3 /usr/bin/pip  # Link pip3 to `/usr/bin/pip`
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
