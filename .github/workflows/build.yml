@@ -40,10 +40,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '2.x'
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -53,6 +49,8 @@ jobs:
         run: npm install
       - name: Build for ${{ matrix.os }}
         run: npm run build
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Package Electron App
         run: npx electron-builder --${{ matrix.os == 'windows-latest' && 'win' || matrix.os == 'macos-latest' && 'mac' || 'linux' }}
       - name: Upload Artifacts
