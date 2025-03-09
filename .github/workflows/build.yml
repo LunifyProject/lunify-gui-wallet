@@ -79,13 +79,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'macos-13' || matrix.os == 'macos-latest'
         with:
-          name: Installer ${{ matrix.os }}
+          name: Installer-${{ matrix.os }}
           path: dist/electron/Packaged/**.dmg
 
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
         with:
-          name: Installer ${{ matrix.os }}
+          name: Installer-${{ matrix.os }}
           path: |
             dist/electron/Packaged/**.AppImage
             dist/electron/Packaged/**.deb
@@ -93,7 +93,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'windows-latest'
         with:
-          name: Installer ${{ matrix.os }}
+          name: Installer-${{ matrix.os }}
           path: dist/electron/Packaged/**.exe
 
   download:
@@ -105,13 +105,36 @@ jobs:
     - name: Download All Artifacts
       uses: actions/download-artifact@v4
       with:
-        path: release
+        path: .
         merge-multiple: false
+        
+    - name: Make 'release' directory
+      run: mkdir release
+
+    - name: Move Windows files
+      run: mv Installer-windows-latest/lunify-gui-wallet-1.0.0-win.exe release/
+
+    - name: Move Ubuntu files
+      run: |
+        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.0-linux.deb release/
+        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.0-linux.AppImage release/
+
+    - name: Move MacOS files
+      run: |
+        mv Installer-macos-latest/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-x64.dmg
+        
+    - name: Move MacOS arm64 files
+      run: |
+        mv Installer-macos-latest/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-arm64.dmg
+
     - name: Create GitHub Release
       id: create_release
       uses: softprops/action-gh-release@v2
       with:
-        name: Lunify GUI Wallet ${{ github.event.inputs.version_number }}
+        name: Lunify ${{ github.event.inputs.version_number }}
         tag_name: ${{ github.event.inputs.version_number }}
         draft: true
         prerelease: false
+        files: release/*
+      env:
+        GITHUB_TOKEN: ${{ env.GH_TOKEN }}
