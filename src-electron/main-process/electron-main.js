@@ -12,11 +12,26 @@ const path = require("upath");
  * Set `__statics` path to static files in production;
  * The reason we are setting it here is that the path needs to be evaluated at runtime
  */
+
+let binLocation = 'bin';
+if(process.platform === "win32") {
+  binLocation = `bin-win`;
+} else if(process.platform === "linux") {
+  binLocation = `bin-linux`;
+} else if(process.platform === "darwin") {
+  if (process.arch === "arm64") {
+    binLocation = `bin-mac-arm64`;
+  } else if (process.arch === "x64") {
+    binLocation = `bin-mac-x64`;
+  }
+}
+
+
 if (process.env.PROD) {
   global.__statics = path.join(__dirname, "statics").replace(/\\/g, "\\\\");
-  global.__lunify_bin = path.join(__dirname, "..", "bin").replace(/\\/g, "\\\\");
+  global.__lunify_bin = path.join(__dirname, "..", binLocation).replace(/\\/g, "\\\\");
 } else {
-  global.__lunify_bin = path.join(process.cwd(), "bin").replace(/\\/g, "\\\\");
+  global.__lunify_bin = path.join(process.cwd(), binLocation).replace(/\\/g, "\\\\");
 }
 
 let mainWindow, backend;
