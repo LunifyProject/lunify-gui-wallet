@@ -130,7 +130,14 @@ module.exports = function() {
         linux: {
           target: ["AppImage", "deb"],
           icon: "src-electron/icons/icon_512x512.png",
-          category: "Finance"
+          category: "Finance",
+          extraResources: [
+            {
+              from: "bin-linux/",
+              to: "bin-linux/",
+              filter: ["**/*"]
+            }
+          ]
         },
 
         mac: {
@@ -140,7 +147,29 @@ module.exports = function() {
           hardenedRuntime: true,
           gatekeeperAssess: false,
           entitlements: "build/entitlements.mac.plist",
-          entitlementsInherit: "build/entitlements.mac.plist"
+          entitlementsInherit: "build/entitlements.mac.plist",
+          extraResources: [
+            {
+              from: "bin-mac-arm64/",
+              to: "bin-mac-arm64/",
+              filter: ["**/*"]
+            },
+            {
+              from: "bin-mac-x64/",
+              to: "bin-mac-x64/",
+              filter: ["**/*"]
+            }
+          ]
+        },
+
+        win: {
+          extraResources: [
+            {
+              from: "bin-win/",
+              to: "bin-win/",
+              filter: ["**/*"]
+            }
+          ]
         },
 
         dmg: {
@@ -153,8 +182,6 @@ module.exports = function() {
         },
 
         files: ["!build/*.js", "!.env", "!dev-app-update.yml"],
-
-        extraResources: ["bin"]
       }
     }
   };
