@@ -1032,7 +1032,7 @@ export class WalletRPC {
         return;
       }
 
-      amount = (parseFloat(amount) * 1e2).toFixed(0);
+      amount = (parseFloat(amount) * 1e8).toFixed(0);
 
       this.sendRPC("stake", {
         amount,
@@ -1213,7 +1213,7 @@ export class WalletRPC {
         return;
       }
 
-      amount = (parseFloat(amount) * 1e2).toFixed(0);
+      amount = (parseFloat(amount) * 1e8).toFixed(0);
 
       let sweep_all = amount == this.wallet_state.unlocked_balance;
 

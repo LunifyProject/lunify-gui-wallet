@@ -243,7 +243,7 @@ export default {
       // id, address, notes, amount, recipient name
       const fields = [tx.txid, tx.note];
 
-      const formattedAmount = tx.amount / 1e2;
+      const formattedAmount = tx.amount / 1e8;
       fields.push(String(formattedAmount));
 
       // Get all addresses and names and add them on
