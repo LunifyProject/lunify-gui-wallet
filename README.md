@@ -1,7 +1,5 @@
 # Lunify Electron GUI Wallet
 
-![Screenshot](https://i.imgur.com/Gou8OMu.jpg "Screenshot")
-
 ### Introduction
 Lunify is a private cryptocurrency based on Monero. Lunify aims to provide everyone the ability to mine and transact with ease and security.
 More information on the project can be found on the [website](https://lunify.xyz).
