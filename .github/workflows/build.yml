@@ -22,7 +22,7 @@ on:
       version_number:
         description: 'Release version'
         required: true
-        default: 'v1.0.0'
+        default: 'v1.0.1'
 
 env:
   USE_HARD_LINKS: false
@@ -112,20 +112,20 @@ jobs:
       run: mkdir release
 
     - name: Move Windows files
-      run: mv Installer-windows-latest/lunify-gui-wallet-1.0.0-win.exe release/
+      run: mv Installer-windows-latest/lunify-gui-wallet-1.0.1-win.exe release/
 
     - name: Move Ubuntu files
       run: |
-        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.0-linux.deb release/
-        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.0-linux.AppImage release/
+        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.1-linux.deb release/
+        mv Installer-ubuntu-latest/lunify-gui-wallet-1.0.1-linux.AppImage release/
 
     - name: Move MacOS arm64 files
       run: |
-        mv Installer-macos-latest/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-arm64.dmg
+        mv Installer-macos-latest/lunify-gui-wallet-1.0.1-mac.dmg release/lunify-gui-wallet-1.0.1-mac-arm64.dmg
         
     - name: Move MacOS x64 files
       run: |
-        mv Installer-macos-13/lunify-gui-wallet-1.0.0-mac.dmg release/lunify-gui-wallet-1.0.0-mac-x64.dmg
+        mv Installer-macos-13/lunify-gui-wallet-1.0.1-mac.dmg release/lunify-gui-wallet-1.0.1-mac-x64.dmg
 
     - name: Create GitHub Release
       id: create_release
