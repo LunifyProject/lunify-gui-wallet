@@ -3,7 +3,7 @@
     <q-btn icon-right="more_vert" :label="$t('buttons.settings')" size="md" flat>
       <q-menu anchor="bottom right" self="top right">
         <q-list separator class="menu-list">
-          <q-item v-close-popup clickable :disabled="!is_ready" @click.native="getPrivateKeys()">
+          <q-item v-close-popup clickable @click.native="getPrivateKeys()">
             <q-item-label header>{{ $t("menuItems.showPrivateKeys") }}</q-item-label>
           </q-item>
           <q-item v-close-popup clickable :disabled="!is_ready" @click.native="showModal('change_password')">
