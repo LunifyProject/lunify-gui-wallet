@@ -9,7 +9,7 @@
       <div class="q-pa-md">
         <div class="row gutter-md">
           <!-- Amount -->
-          <div class="col-6 amount">
+          <div class="col-12 amount">
             <LunifyField :label="$t('fieldLabels.amount')" :error="$v.newTx.amount.$error">
               <q-input
                 v-model="newTx.amount"
@@ -29,21 +29,6 @@
               >
                 {{ $t("buttons.all") }}
               </q-btn>
-            </LunifyField>
-          </div>
-
-          <!-- Priority -->
-          <div class="col-6 priority">
-            <LunifyField :label="$t('fieldLabels.priority')">
-              <q-select
-                v-model="newTx.priority"
-                emit-value
-                map-options
-                :dark="theme == 'dark'"
-                :options="priorityOptions"
-                borderless
-                dense
-              />
             </LunifyField>
           </div>
         </div>
@@ -160,23 +145,18 @@ export default {
   },
   mixins: [WalletPassword],
   data() {
-    let priorityOptions = [
-      { label: this.$t("strings.priorityOptions.blink"), value: 5 }, // Blink
-      { label: this.$t("strings.priorityOptions.slow"), value: 1 } // Slow
-    ];
     return {
       newTx: {
         amount: 0,
         address: "",
         payment_id: "",
-        priority: priorityOptions[0],
+        priority: 1,
         address_book: {
           save: false,
           name: "",
           description: ""
         }
-      },
-      priorityOptions: priorityOptions
+      }
     };
   },
   computed: mapState({
@@ -235,7 +215,7 @@ export default {
               amount: 0,
               address: "",
               payment_id: "",
-              priority: 0,
+              priority: 1,
               address_book: {
                 save: false,
                 name: "",
