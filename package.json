@@ -1,6 +1,6 @@
 {
   "name": "lunify-gui-wallet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Modern GUI wallet for Lunify",
   "productName": "Lunify Electron Wallet",
   "repository": {
