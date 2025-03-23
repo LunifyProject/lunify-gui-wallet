@@ -112,7 +112,7 @@ jobs:
       run: mkdir release
 
     - name: Move Windows files
-      run: mv Installer-windows-latest/lunify-gui-wallet-1.0.1-win.exe release/
+      run: mv Installer-windows-latest/lunify-gui-wallet-${{ github.event.inputs.version_number }}-win.exe release/
 
     - name: Move Ubuntu files
       run: |
