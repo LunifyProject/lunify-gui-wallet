@@ -50,7 +50,7 @@ export default {
 <style lang="scss">
 .wallet-info {
   .wallet-header {
-    padding: 0.8rem 1.5rem;
+    padding: 6px 18px;
     .title {
       font-weight: bold;
     }
