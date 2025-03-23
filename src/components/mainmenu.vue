@@ -166,4 +166,8 @@ export default {
 .q-mb-sm, .q-my-sm {
     margin-bottom: 0px;
 }
+
+.menu-list .q-item {
+  padding: 0px 4px;
+}
 </style>
