@@ -16,7 +16,7 @@
       <div class="app-content">
         <div class="navigation row items-end">
           <router-link to="/wallet">
-            <q-btn class="single-icon" size="md" icon="swap_horiz" />
+            <q-btn class="large-btn-send colorWhite" label="Transactions" size="md" icon-right="swap_horiz" align="between" />
           </router-link>
           <router-link to="/wallet/send">
             <q-btn class="large-btn-send colorWhite" :label="$t('buttons.send')" size="md" icon-right="arrow_right_alt"
@@ -27,7 +27,7 @@
               align="between" />
           </router-link>
           <router-link to="/wallet/addressbook" class="address">
-            <q-btn class="single-icon" size="md" icon="person" />
+            <q-btn class="large-btn-send colorWhite" label="Address Book" size="md" icon-right="person" align="between" />
           </router-link>
         </div>
         <div class="hr-separator" />
